@@ -1,1 +1,6 @@
-print("Hello World!")
+from textnode import TextNode
+from textnode import TextType
+def main():
+    text = TextNode("This is some anchor text", TextType.LINK_TEXT, "https://www.boot.dev")
+    print(text)
+main()
