@@ -14,4 +14,5 @@ class HTMLNode:
             for key, value in self.props.items():
                 string += f' {key}="{value}"'
             return string
-    
+    def __repr__(self):
+        return f"tag={self.tag}, value={self.value}, children={self.children}, props={self.props}"
