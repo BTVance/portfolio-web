@@ -52,24 +52,24 @@ class ParentNode(HTMLNode):
             return f"<{self.tag}{attrs}>{inner_html}</{self.tag}>"
         
 def text_node_to_html_node(text_node):
-        t = text_node.text
-        tt = text_node.text_type
+    t = text_node.text
+    tt = text_node.text_type
 
-        if tt == TextType.TEXT:
-            return LeafNode(None, t)
-        elif tt == TextType.BOLD:
-            return LeafNode("b", t)
-        elif tt == TextType.ITALIC:
-            return LeafNode("i", t)
-        elif tt == TextType.CODE:
-            return LeafNode("code", t)
-        elif tt == TextType.LINK:
-            if text_node.url is None:
-                raise ValueError("Link TextNode must have url")
-            return LeafNode("a", t, props={"href": text_node.url})
-        elif tt == TextType.IMAGE:
-            if text_node.url is None:
-                raise ValueError("Image TextNode must have url")
-            return LeafNode("img", "", props={"src": text_node.url, "alt" : t})
-        raise Exception("Invalid TextType for text_node_to_html_node")
+    if tt == TextType.TEXT:
+        return LeafNode(None, t)
+    elif tt == TextType.BOLD:
+        return LeafNode("b", t)
+    elif tt == TextType.ITALIC:
+        return LeafNode("i", t)
+    elif tt == TextType.CODE:
+        return LeafNode("code", t)
+    elif tt == TextType.LINK:
+        if text_node.url is None:
+            raise ValueError("Link TextNode must have url")
+        return LeafNode("a", t, props={"href": text_node.url})
+    elif tt == TextType.IMAGE:
+        if text_node.url is None:
+            raise ValueError("Image TextNode must have url")
+        return LeafNode("img", "", props={"src": text_node.url, "alt" : t})
+    raise Exception("Invalid TextType for text_node_to_html_node")
         
