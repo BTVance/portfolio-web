@@ -91,7 +91,7 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(html_node.value, "Boot.dev")
         self.assertEqual(html_node.props["href"], "https://boot.dev")
     def test_image(self):
-        node = TextNode("", TextType.IMAGE, "https://example.com/image.png", "Example Image")
+        node = TextNode("Example Image", TextType.IMAGE, "https://example.com/image.png")
         html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, "img")
         self.assertEqual(html_node.value, "")
