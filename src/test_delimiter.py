@@ -1,5 +1,5 @@
 from textnode import TextNode, TextType
-from delimiter import split_nodes_delimiter
+from delimiter import split_nodes_delimiter, extract_markdown_images, extract_markdown_links
 import unittest
 
 class TestSplitNodesDelimiter(unittest.TestCase):
@@ -47,3 +47,27 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         self.assertEqual(len(result_nodes), len(expected_nodes))
         for i in range(len(result_nodes)):
             self.assertEqual(result_nodes[i], expected_nodes[i])
+
+    def test_extract_markdown_images(self):
+        matches = extract_markdown_images(
+        "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png)"
+    )
+        self.assertListEqual([("image", "https://i.imgur.com/zjjcJKZ.png")], matches)
+    
+    def test_extract_markdown_links(self):
+        matches = extract_markdown_links(
+        "This is text with a link [link](https://.bootdev.com)"
+    )
+        self.assertListEqual([("link", "https://.bootdev.com")], matches)
+
+    def test_multiple_links(self):
+        matches = extract_markdown_links(
+            "this is a text with two links [link](https://.bootdev.com), [link](https://google.com)"
+        )
+        self.assertListEqual([("link", "https://.bootdev.com"), ("link", "https://google.com")], matches)
+    
+    def test_no_links(self):
+        matches = extract_markdown_links(
+            "this is a text with no links"
+        )
+        self.assertEqual([], matches)
