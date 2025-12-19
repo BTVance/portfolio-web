@@ -5,8 +5,8 @@ def copy_files_recursive(src, dst):
     for entry in entries:
        src_path = os.path.join(src, entry)
        dst_path = os.path.join(dst, entry)
-       if os.path.isfile(src_path, dst_path):
-           shutil.copy(src_path, dst)
+       if os.path.isfile(src_path):
+           shutil.copy(src_path, dst_path)
        elif os.path.isdir(src_path):
            copy_files_recursive(src_path, dst_path)
     
